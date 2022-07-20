@@ -20,7 +20,7 @@ class MealsSeeder extends Seeder
         $faker = \Faker\Factory::create();
 
         Meal::factory()
-            ->count(3)
+            ->count(6)
             ->hasTags(3)
             ->hasIngredients(2)
             ->create();
