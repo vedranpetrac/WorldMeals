@@ -18,7 +18,7 @@ class TagSeeder extends Seeder
         $faker = \Faker\Factory::create();
 
         Tag::factory()
-            ->count(5)
+            ->count(1)
             ->create();
     }
 }

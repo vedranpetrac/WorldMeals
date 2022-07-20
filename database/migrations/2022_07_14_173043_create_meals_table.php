@@ -28,8 +28,8 @@ return new class extends Migration
             $table->string('title');
             $table->string('description');
 
-            $table->unique(['meal_id','locale_id']);
-            $table->foreignId('locale_id')->references('id')->on('locales')->onDelete('cascade');
+            $table->unique(['meal_id','locale']);
+            $table->foreignId('locale')->references('id')->on('locales')->onDelete('cascade');
             $table->foreignId('meal_id')->references('id')->on('meals')->onDelete('cascade');
         });
     }

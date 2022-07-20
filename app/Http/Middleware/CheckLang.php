@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class CheckLang
 {
@@ -16,14 +17,9 @@ class CheckLang
      */
     public function handle(Request $request, Closure $next)
     {
-        $lang = 'ar';
-        if($request->route('lang')) {
-            $lang = $request->route('lang');
-            // and remove the language parameter so we dont have to include it in all controller methods.
-            $request->route()->forgetParameter('lang');
-        }
-        //app()->setLocale($lang);
-
+        $lang=$request->query('lang') ? $request->query('lang') : 'en';
+        App::setLocale($lang);
+        array_merge($request->query(), ['lang' => $lang]);
         return $next($request);
     }
 }

@@ -18,7 +18,7 @@ class CategoriesSeeder extends Seeder
         $faker = \Faker\Factory::create();
 
         Category::factory()
-            ->count(2)
+            ->count(3)
             ->create();
     }
 }

@@ -23,11 +23,11 @@ return new class extends Migration
 
         Schema::create('tag_translations', function (Blueprint $table){
             $table->id();
-            $table->foreignId('locale_id')->references('id')->on('locales')->onDelete('cascade');
+            $table->foreignId('locale')->references('id')->on('locales')->onDelete('cascade');
 
             $table->string('title');
 
-            $table->unique(['tag_id','locale_id']);
+            $table->unique(['tag_id','locale']);
             $table->foreignId('tag_id')->references('id')->on('tags')->onDelete('cascade');
         });
     }

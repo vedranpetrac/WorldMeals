@@ -21,7 +21,6 @@ class MealController extends Controller
      */
     public function index(Request $request)
     {
-        App::setLocale('1');
 
         $jsonService = new JsonDetailsService();
         $mealsFilter = new MealsFilter();
@@ -45,7 +44,7 @@ class MealController extends Controller
             $meals = $meals->whereOr([['created_at','>',$mealsFilter->getTimestamp($request)],['updated_at','>',$mealsFilter->getTimestamp($request)],['deleted_at','>',$mealsFilter->getTimestamp($request)]]);
         }
 
-        return new MealCollection($meals->paginate($per_page = $jsonService->definePerPage($request))->appends($request->query()));
+        return new MealCollection($meals->paginate($perPage = $jsonService->definePerPage($request))->appends($request->query()));
 
 
     }

@@ -21,11 +21,11 @@ return new class extends Migration
 
         Schema::create('ingredient_translations', function (Blueprint $table){
             $table->id();
-            $table->foreignId('locale_id')->references('id')->on('locales')->onDelete('cascade');
+            $table->foreignId('locale')->references('id')->on('locales')->onDelete('cascade');
 
             $table->string('title');
 
-            $table->unique(['ingredient_id','locale_id']);
+            $table->unique(['ingredient_id','locale']);
             $table->foreignId('ingredient_id')->references('id')->on('ingredients')->onDelete('cascade');
         });
     }

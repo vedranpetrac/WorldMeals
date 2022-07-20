@@ -23,8 +23,8 @@ return new class extends Migration
             $table->id();
             $table->string('title');
 
-            $table->unique(['category_id','locale_id']);
-            $table->foreignId('locale_id')->references('id')->on('locales')->onDelete('cascade');
+            $table->unique(['category_id','locale']);
+            $table->foreignId('locale')->references('id')->on('locales')->onDelete('cascade');
             $table->foreignId('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
 

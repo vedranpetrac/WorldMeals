@@ -18,7 +18,7 @@ class IngredientsSeeder extends Seeder
         $faker = \Faker\Factory::create();
 
         Ingredient::factory()
-            ->count(10)
+            ->count(1)
             ->create();
     }
 }

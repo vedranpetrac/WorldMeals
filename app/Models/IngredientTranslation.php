@@ -11,4 +11,6 @@ class IngredientTranslation extends Model
 
     public $timestamps = false;
     protected $fillable = ['title'];
+
+
 }

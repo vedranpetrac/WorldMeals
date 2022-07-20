@@ -1,9 +1,8 @@
 <?php
 
 use App\Http\Controllers\MealController;
-use App\Http\Controllers\TagController;
 use App\Models\Meal;
-use App\Models\Tag;
+use App\Services\LanguageService;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +17,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $langService = new LanguageService();
+    $default = $langService->getDefaultCode();
+    return redirect("meals?lang=$default");
 });
 
-Route::get('meals', [MealController::class,'index']);
+Route::get("meals", [MealController::class,'index']);

@@ -12,4 +12,6 @@ class Locale extends Model
     public $timestamps = false;
 
     protected $fillable = ['code'];
+
+
 }

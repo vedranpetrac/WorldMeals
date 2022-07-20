@@ -31,7 +31,7 @@ class JsonDetailsService
   public function definePerPage(Request $request): int
   {
       $requestPerPage = $request->query('per_page');
-      if(!isset($requestWith)){
+      if(!isset($requestPerPage)){
           return 0;
       }
       if(is_numeric($requestPerPage) && $requestPerPage > 0){
