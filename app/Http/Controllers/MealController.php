@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
 use App\Services\JsonDetailsService;
+use Carbon\Carbon;
 
 
 class MealController extends Controller
@@ -31,7 +32,7 @@ class MealController extends Controller
 
         if($mealsFilterTags !== null){
             $meals = $meals->whereHas('tags', function ($query) use($mealsFilterTags) {
-                $query->WhereIn('meal_tag.tag_id',$mealsFilterTags);
+                $query->where('meal_tag.tag_id',$mealsFilterTags);
             });
         }
 
@@ -41,7 +42,14 @@ class MealController extends Controller
 
         if($mealsFilter->getTimestamp($request) != null){
             $meals = $meals->withTrashed();
-            $meals = $meals->whereOr([['created_at','>',$mealsFilter->getTimestamp($request)],['updated_at','>',$mealsFilter->getTimestamp($request)],['deleted_at','>',$mealsFilter->getTimestamp($request)]]);
+            Log::info($mealsFilter->getTimestamp($request));
+            $cDate = Carbon::createFromTimestamp($mealsFilter->getTimestamp($request))->toDateTimeString();
+            $meals = $meals->where(function ($query) use ($cDate) {
+                $query->whereDate('created_at','>',$cDate)
+                    ->orWhereDate('updated_at','>',$cDate)
+                    ->orWhereDate('deleted_at','>',$cDate);
+            });
+
         }
 
         return new MealCollection($meals->paginate($perPage = $jsonService->definePerPage($request))->appends($request->query()));

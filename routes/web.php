@@ -17,9 +17,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $langService = new LanguageService();
-    $default = $langService->getDefaultCode();
-    return redirect("meals?lang=$default");
+    return view('welcome');
 });
 
-Route::get("meals", [MealController::class,'index']);
