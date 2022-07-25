@@ -10,9 +10,6 @@ class LanguageService
     public function getLanguage(Request $request){
 
         $requestLang = $request->query('lang');
-        if(!isset($requestLang)){
-            abort( response()->json("lang param is missing", 500) );
-        }
 
         $locales = Locale::all();
         $localeId = null;

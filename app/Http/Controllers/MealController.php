@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Filters\MealsFilter;
+use App\Http\Requests\MealIndexRequest;
 use App\Http\Resources\MealCollection;
 use App\Http\Resources\TagResource;
 use App\Models\Meal;
+use App\Services\LanguageService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
@@ -18,10 +20,16 @@ class MealController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param MealIndexRequest $request
      * @return MealCollection
      */
-    public function index(Request $request)
+    public function index(MealIndexRequest $request)
     {
+
+        $validated = $request->validated();
+
+        $langServiceLocale = new LanguageService();
+        App::setLocale($langServiceLocale->getLanguage($request));
 
         $jsonService = new JsonDetailsService();
         $mealsFilter = new MealsFilter();

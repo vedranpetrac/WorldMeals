@@ -17,7 +17,7 @@ class Controller extends BaseController
 
     public function __construct(Request $request)
     {
-        $langServiceLocale = new LanguageService();
-        App::setLocale($langServiceLocale->getLanguage($request));
+
+
     }
 }

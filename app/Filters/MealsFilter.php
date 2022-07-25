@@ -39,9 +39,6 @@ class MealsFilter
                 return [['category_id','!=',null]];
             case (is_numeric($requestCat) && $requestCat >= 0) :
                 return [['category_id','=',$requestCat]];
-            default:
-                abort( response()->json("$requestCat is not valid parameter for filtering by category", 500) );
-
         }
     }
 
