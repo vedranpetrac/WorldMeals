@@ -29,7 +29,7 @@ class MealIndexRequest extends FormRequest
      */
     public function rules()
     {
-        $withSafeValues = ['ingredients','category','tags'];
+
         $langService = new LanguageService();
         $defLang = $langService->getDefaultCode();
 
