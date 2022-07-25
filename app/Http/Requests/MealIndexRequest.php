@@ -49,8 +49,8 @@ class MealIndexRequest extends FormRequest
                 }
             }],
             'diff_time' => 'integer|min:1',
-            'per_page' => 'integer',
-            'page' => 'integer',
+            'per_page' => 'integer|min:1',
+            'page' => 'integer|min:1',
             'with' => [function ($attribute, $value, $fail){
                 $value = explode(',',$value);
                 $safeParams = ['ingredients','category','tags'];
